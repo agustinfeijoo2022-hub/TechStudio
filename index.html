@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS Amazon Linux - Panel de Control</title>
+    <title>TechStudio - Panel de Control AWS</title>
     <style>
-        /* RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #2d1b69 100%);
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 40%, #2d1b69 100%);
             min-height: 100vh;
-            color: #ffffff;
-            padding: 2rem;
+            padding: 30px;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         /* HEADER */
@@ -25,399 +23,310 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 20px 30px;
+            background: rgba(255,255,255,0.05);
             backdrop-filter: blur(20px);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            margin-bottom: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 30px;
             flex-wrap: wrap;
+            gap: 15px;
         }
-
         .header h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            /* TEXTO DEGRADADO CORRECTO */
+            font-size: 2.2rem;
             background: linear-gradient(135deg, #00d2ff, #7b2ffc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
-
         .header nav {
             display: flex;
-            gap: 2rem;
+            gap: 25px;
             flex-wrap: wrap;
         }
-
         .header nav a {
             color: #8892b0;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
+        .header nav a:hover { color: #64ffda; }
 
-        .header nav a:hover {
-            color: #64ffda;
-        }
-
-        /* HERO SECTION */
+        /* HERO */
         .hero {
             text-align: center;
-            padding: 3rem 2rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 2rem;
+            padding: 50px 30px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 30px;
         }
-
         .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 15px;
         }
-
+        .hero h2 span { color: #64ffda; }
         .hero p {
             color: #8892b0;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
         }
-
-        .hero .highlight {
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .hero-badge {
+            background: rgba(0,210,255,0.1);
             color: #64ffda;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.8rem 2.5rem;
-            background: linear-gradient(135deg, #00d2ff, #7b2ffc);
-            border: none;
+            padding: 10px 30px;
             border-radius: 50px;
-            color: #ffffff;
-            text-decoration: none;
+            border: 1px solid rgba(0,210,255,0.2);
             font-weight: 600;
-            font-size: 1rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
         }
 
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
-        }
-
-        /* SERVICES GRID */
+        /* SERVICIOS - 3 TARJETAS */
         .services {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
         }
-
         .service-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s;
+            background: rgba(255,255,255,0.04);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
             text-align: center;
+            transition: all 0.3s;
         }
-
         .service-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(0, 210, 255, 0.3);
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(0,210,255,0.3);
         }
-
-        .service-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .service-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .service-card p {
-            color: #8892b0;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .badge-active {
+        .service-card .icon { font-size: 3.5rem; margin-bottom: 15px; display: block; }
+        .service-card h3 { font-size: 1.4rem; margin-bottom: 8px; }
+        .service-card p { color: #8892b0; font-size: 0.95rem; margin-bottom: 12px; }
+        .service-card .status {
             display: inline-block;
-            background: rgba(0, 210, 255, 0.15);
+            background: rgba(0,210,255,0.12);
             color: #64ffda;
-            padding: 0.3rem 1rem;
+            padding: 5px 20px;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid rgba(0, 210, 255, 0.2);
+            border: 1px solid rgba(0,210,255,0.15);
         }
 
-        /* INFO SECTIONS */
+        /* GRID DE INFORMACIÓN */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
         }
-
         .info-box {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255,255,255,0.04);
+            padding: 25px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
         }
-
-        .info-box h2 {
+        .info-box h3 {
             font-size: 1.3rem;
-            margin-bottom: 1rem;
             color: #64ffda;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 10px;
         }
-
-        .info-item {
+        .info-row {
             display: flex;
             justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
         }
+        .info-row .label { color: #8892b0; }
+        .info-row .value { color: #fff; font-weight: 500; }
 
-        .info-item .label {
-            color: #8892b0;
-        }
-
-        .info-item .value {
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        /* TABLE */
+        /* TABLA */
         .table-container {
             overflow-x: auto;
+            margin-top: 10px;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
         }
-
         table th {
-            background: rgba(0, 210, 255, 0.1);
-            padding: 0.8rem;
+            background: rgba(0,210,255,0.08);
+            padding: 12px 15px;
             text-align: left;
+            color: #64ffda;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #64ffda;
         }
-
         table td {
-            padding: 0.8rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
             color: #ccd6f6;
         }
-
-        table tr:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
+        table tr:hover { background: rgba(255,255,255,0.02); }
 
         /* FOOTER */
         .footer {
             text-align: center;
-            padding: 1.5rem;
+            padding: 25px;
             color: #495670;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 1rem;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 10px;
         }
-
-        .footer span {
-            color: #64ffda;
-        }
+        .footer span { color: #64ffda; }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .header nav {
-                justify-content: center;
-            }
-
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-
-            .services {
-                grid-template-columns: 1fr;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.2rem;
-            }
-
-            .hero h2 {
-                font-size: 1.4rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .service-card {
-                padding: 1.5rem;
-            }
-
-            .info-box {
-                padding: 1.5rem;
-            }
-
-            table th,
-            table td {
-                padding: 0.5rem;
-                font-size: 0.8rem;
-            }
+            .services { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .header { flex-direction: column; text-align: center; }
+            .hero h2 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
+    <div class="container">
 
-    <!-- HEADER -->
-    <header class="header">
-        <h1>🚀 AWS Amazon Linux</h1>
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="#">Servicios</a>
-            <a href="#">Infraestructura</a>
-            <a href="#">Inventario</a>
-        </nav>
-    </header>
+        <!-- HEADER -->
+        <header class="header">
+            <h1>🚀 TechStudio</h1>
+            <nav>
+                <a href="#">Inicio</a>
+                <a href="#">Servicios</a>
+                <a href="#">Infraestructura</a>
+                <a href="#">Inventario</a>
+            </nav>
+        </header>
 
-    <!-- HERO -->
-    <section class="hero">
-        <h2>Infraestructura <span class="highlight">Cloud</span></h2>
-        <p>Servidores web, bases de datos y almacenamiento en AWS</p>
-        <a href="#" class="btn">Ver servicios</a>
-    </section>
+        <!-- HERO -->
+        <section class="hero">
+            <h2>Infraestructura <span>Cloud</span></h2>
+            <p>Servidores web, bases de datos y almacenamiento en AWS</p>
+            <div class="hero-badges">
+                <span class="hero-badge">🌐 Nginx Activo</span>
+                <span class="hero-badge">🗄️ MariaDB Activo</span>
+                <span class="hero-badge">📁 FTP Activo</span>
+            </div>
+        </section>
 
-    <!-- SERVICES -->
-    <section class="services">
-        <div class="service-card">
-            <span class="icon">🌐</span>
-            <h3>Servidor Web</h3>
-            <p>Nginx en Amazon Linux 2023</p>
-            <span class="badge-active">✅ Activo</span>
-        </div>
-        <div class="service-card">
-            <span class="icon">🗄️</span>
-            <h3>Base de Datos</h3>
-            <p>MariaDB 10.5</p>
-            <span class="badge-active">✅ Activo</span>
-        </div>
-        <div class="service-card">
-            <span class="icon">📁</span>
-            <h3>Servidor FTP</h3>
-            <p>vsftpd</p>
-            <span class="badge-active">✅ Activo</span>
-        </div>
-    </section>
+        <!-- SERVICIOS -->
+        <section class="services">
+            <div class="service-card">
+                <span class="icon">🌐</span>
+                <h3>Servidor Web</h3>
+                <p>Nginx en Amazon Linux 2023</p>
+                <span class="status">✅ Activo</span>
+            </div>
+            <div class="service-card">
+                <span class="icon">🗄️</span>
+                <h3>Base de Datos</h3>
+                <p>MariaDB 10.5</p>
+                <span class="status">✅ Activo</span>
+            </div>
+            <div class="service-card">
+                <span class="icon">📁</span>
+                <h3>Servidor FTP</h3>
+                <p>vsftpd</p>
+                <span class="status">✅ Activo</span>
+            </div>
+        </section>
 
-    <!-- INFO GRID -->
-    <section class="info-grid">
-        <!-- Infraestructura -->
-        <div class="info-box">
-            <h2>⚙️ Infraestructura</h2>
-            <div class="info-item">
-                <span class="label">Sistema Operativo</span>
-                <span class="value">Amazon Linux 2023</span>
+        <!-- INFO GRID -->
+        <section class="info-grid">
+            <!-- INFRAESTRUCTURA -->
+            <div class="info-box">
+                <h3>⚙️ Infraestructura</h3>
+                <div class="info-row">
+                    <span class="label">Sistema Operativo</span>
+                    <span class="value">Amazon Linux 2023</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Servidor Web</span>
+                    <span class="value">Nginx</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Base de Datos</span>
+                    <span class="value">MariaDB 10.5</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Servidor FTP</span>
+                    <span class="value">vsftpd</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Plataforma</span>
+                    <span class="value">AWS EC2</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">IP Pública</span>
+                    <span class="value" style="color:#64ffda;">3.85.127.125</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Fecha</span>
+                    <span class="value" id="fecha"></span>
+                </div>
             </div>
-            <div class="info-item">
-                <span class="label">Servidor Web</span>
-                <span class="value">Nginx</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Base de Datos</span>
-                <span class="value">MariaDB 10.5</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Servidor FTP</span>
-                <span class="value">vsftpd</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Plataforma</span>
-                <span class="value">AWS EC2</span>
-            </div>
-            <div class="info-item">
-                <span class="label">IP Pública</span>
-                <span class="value">35.153.157.12</span>
-            </div>
-        </div>
 
-        <!-- Inventario -->
-        <div class="info-box">
-            <h2>📋 Inventario</h2>
-            <p style="color: #8892b0; font-size: 0.9rem; margin-bottom: 1rem;">
-                La base de datos <strong style="color: #64ffda;">inventario</strong> contiene productos registrados en MariaDB para pruebas del sistema.
-            </p>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Producto</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Laptop Dell</td>
-                            <td>Equipo portátil 16GB RAM</td>
-                            <td>$999.99</td>
-                            <td>5</td>
-                            <td>2025-06-24</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Mouse Logitech</td>
-                            <td>Mouse inalámbrico</td>
-                            <td>$25.50</td>
-                            <td>20</td>
-                            <td>2025-06-20</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- INVENTARIO -->
+            <div class="info-box">
+                <h3>📋 Inventario</h3>
+                <p style="color:#8892b0; font-size:0.9rem; margin-bottom:15px;">
+                    La base de datos <strong style="color:#64ffda;">inventario</strong> contiene productos registrados en MariaDB.
+                </p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Laptop Dell</td>
+                                <td>$899.99</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Mouse Logitech</td>
+                                <td>$25.50</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Monitor Samsung</td>
+                                <td>$199.99</td>
+                                <td>10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <p>Evaluación Sumativa N°4 · <span>Sistemas Operativos</span> · 2026</p>
-    </footer>
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>Evaluación Sumativa N°4 · <span>Sistemas Operativos</span> · 2026</p>
+        </footer>
 
+    </div>
+
+    <script>
+        document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-ES', {
+            year: 'numeric', month: 'long', day: 'numeric'
+        });
+    </script>
 </body>
 </html>
